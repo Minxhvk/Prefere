@@ -30,6 +30,7 @@ class MultiHttpSecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
 
         return http
+            .csrf { csrf -> csrf.disable() }
             .authorizeHttpRequests { authorize ->
                 authorize
                     .requestMatchers(*AUTH_WHITELIST).permitAll()
@@ -37,7 +38,6 @@ class MultiHttpSecurityConfig(
                     .requestMatchers(HttpMethod.GET, "/interests").permitAll()
                     .anyRequest().authenticated()
             }
-            .csrf { csrf -> csrf.disable() }
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
             .httpBasic(Customizer.withDefaults())
             .build()

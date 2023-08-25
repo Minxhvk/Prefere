@@ -9,7 +9,6 @@ import java.time.LocalDate
 
 
 @Entity
-@Table(name = "member")
 class Member constructor(
 
     @Id
@@ -43,14 +42,12 @@ class Member constructor(
             throw IllegalArgumentException("이메일은 40자 이내로 입력해야 합니다.")
         }
 
-        // Mobile Format
-
         check(name.isNotBlank()) {
-            throw IllegalArgumentException("이름은 비어있을 수 없습니다.")
+            throw IllegalArgumentException("이름을 입력해 주세요.")
         }
 
         check(email.isNotBlank()) {
-            throw IllegalArgumentException("이메일은 비어있을 수 없습니다.")
+            throw IllegalArgumentException("이메일을 입력해 주세요.")
         }
 
     }
